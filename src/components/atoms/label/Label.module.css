@@ -1,0 +1,14 @@
+.label {
+  display: inline-block;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-xs);
+}
+.label--required::after {
+  content: "*";
+  color: var(--color-danger);
+  margin-left: 0.25rem;
+  font-weight: var(--font-weight-bold);
+}
