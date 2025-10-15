@@ -1,74 +1,66 @@
-# React + TypeScript + Vite
+# 🎨 React UI Components — Atomic Design Architecture
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una colección de **componentes reutilizables de interfaz de usuario** creados con **React + TypeScript + CSS Modules**, siguiendo la metodología **Atomic Design**.  
+Su objetivo es construir una base sólida y escalable de componentes visuales (botones, inputs, campos de formulario, etc.) para utilizar en aplicaciones más grandes.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧱 Arquitectura: Atomic Design
 
-## React Compiler
+El proyecto se organiza siguiendo la metodología **[Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/)**, propuesta por Brad Frost.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🧬 Estructura jerárquica
 
-## Expanding the ESLint configuration
+1. **Atoms (Átomos)**  
+   Son los elementos más pequeños e indivisibles de la UI.  
+   Ejemplos: `Button`, `Input`, `Label`, `DatePicker`.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. **Molecules (Moléculas)**  
+   Combinan varios átomos para formar una unidad funcional.  
+   Ejemplo: `FormField` (compuesto por `Label + Input + Error`).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+3. **Organisms (Organismos)** *(por implementar)*  
+   Unen moléculas y átomos para formar secciones completas o bloques de UI.  
+   Ejemplo: un formulario completo, una tarjeta de producto, un encabezado, etc.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+4. **Templates & Pages** *(etapa futura)*  
+   Definen la estructura visual de una página usando organismos y moléculas.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧭 Estructura del proyecto
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# sistema-reservas-viajes-frontend
+```bash
+src/
+│
+├── components/
+│   ├── atoms/
+│   │   ├── Button/
+│   │   │   ├── Button.tsx
+│   │   │   └── Button.module.css
+│   │   ├── Input/
+│   │   │   ├── Input.tsx
+│   │   │   └── Input.module.css
+│   │   ├── Label/
+│   │   │   ├── Label.tsx
+│   │   │   └── Label.module.css
+│   │   ├── DatePicker/
+│   │   │   ├── DatePicker.tsx
+│   │   │   └── DatePicker.module.css
+│   │   └── index.ts
+│   │
+│   ├── molecules/
+│   │   ├── FormField/
+│   │   │   ├── FormField.tsx
+│   │   │   └── FormField.module.css
+│   │   └── index.ts
+│   │
+│   └── organisms/
+│       └── (por implementar)
+│
+├── styles/
+│   └── tokens.css      
+│
+├── App.tsx
+├── main.tsx
+└── vite.config.ts
