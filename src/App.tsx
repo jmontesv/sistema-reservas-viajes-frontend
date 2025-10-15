@@ -3,6 +3,7 @@ import Button from "./components/atoms/Button/Button";
 import Input from "./components/atoms/Input/Input";
 import FormField from "./components/molecules/FormField/FormField";
 import DatePicker from "./components/atoms/DatePicker/DatePicker";
+import FormSearch from "./components/organisms/FormSearch/FormSearch";
 
 export default function App() {
     const [name, setName] = useState("");
@@ -54,6 +55,7 @@ export default function App() {
           />
           <p>Fecha seleccionada: {date}</p>
         </div>
+        <FormSearch onSubmit={() => console.log("submit")}/>
       </div>
     );
 }

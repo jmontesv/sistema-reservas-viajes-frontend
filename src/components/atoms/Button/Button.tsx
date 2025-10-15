@@ -1,8 +1,9 @@
+import type { ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.css";
 
 type ButtonVariant = "primary" | "secondary" | "danger";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<any> {
     variant?: ButtonVariant;
     disabled?: boolean;
     children: React.ReactNode;

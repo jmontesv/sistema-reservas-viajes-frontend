@@ -1,7 +1,6 @@
 .field {
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--space-md);
 }
 
 .error {

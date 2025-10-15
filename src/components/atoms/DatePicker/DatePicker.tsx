@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./DatePicker.module.css";
+import Button from "../Button/Button";
 
 interface DatePickerProps {
   value?: string;
@@ -77,9 +78,9 @@ export default function DatePicker({ value, onChange, placeholder = "Selecciona 
       {isOpen && (
         <div className={styles.calendar}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-            <button type="button" onClick={handlePrevMonth}>&lt;</button>
+            <Button variant="secondary" onClick={handlePrevMonth}>{"<"}</Button>
             <span>{currentMonth.toLocaleString("default", { month: "long", year: "numeric" })}</span>
-            <button type="button" onClick={handleNextMonth}>&gt;</button>
+            <Button variant="secondary" onClick={handleNextMonth}>{">"}</Button>
           </div>
 
           <div className={styles.calendarGrid}>
