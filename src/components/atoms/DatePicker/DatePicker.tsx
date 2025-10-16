@@ -7,9 +7,10 @@ interface DatePickerProps {
   onChange?: (date: string) => void;
   placeholder?: string;
   disabled?: boolean;
+  error?: boolean;
 }
 
-export default function DatePicker({ value, onChange, placeholder = "Selecciona fecha", disabled = false }: DatePickerProps) {
+export default function DatePicker({ value, onChange, placeholder = "Selecciona fecha",  error = false, disabled = false }: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string>(value || "");
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -68,7 +69,7 @@ export default function DatePicker({ value, onChange, placeholder = "Selecciona 
   return (
     <div className={styles.datePickerWrapper} ref={wrapperRef}>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error ? styles.inputError : ""}`}
         readOnly
         value={selectedDate}
         onClick={() => !disabled && setIsOpen(!isOpen)}

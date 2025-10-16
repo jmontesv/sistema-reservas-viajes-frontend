@@ -26,3 +26,7 @@
   cursor: not-allowed;
   opacity: var(--opacity-disabled);
 }
+.inputError {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+}

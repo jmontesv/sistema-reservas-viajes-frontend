@@ -2,8 +2,15 @@ import { useState } from "react";
 import Button from "./components/atoms/Button/Button";
 import Input from "./components/atoms/Input/Input";
 import FormField from "./components/molecules/FormField/FormField";
-import DatePicker from "./components/atoms/DatePicker/DatePicker";
 import FormSearch from "./components/organisms/FormSearch/FormSearch";
+import { Table } from "./components/organisms/Table/Table";
+
+const headers = ["Origen", "Destino", "Fecha salida", "Hora salida", "Asientos totales", "Asientos disponibles", "Reservable", ""];
+const rows = [
+  ["New York", "Madrid", "2025-11-01", "18:00", "180", "35", "Reservable", <Button>Reservar</Button>],
+  ["New York", "Madrid", "2025-11-01", "18:00", "180", "35", "Reservable", <Button>Reservar</Button>],
+  ["New York", "Madrid", "2025-11-01", "18:00", "180", "35", "Reservable", <Button>Reservar</Button>],
+];
 
 export default function App() {
     const [name, setName] = useState("");
@@ -47,6 +54,9 @@ export default function App() {
           <Button>Enviar</Button>
         </form>
         <FormSearch onSubmit={() => console.log("submit")}/>
+        <div style={{width: "70%", margin: "100px auto"}}>
+          <Table headers={headers} rows={rows} />
+        </div>
       </div>
     );
 }
