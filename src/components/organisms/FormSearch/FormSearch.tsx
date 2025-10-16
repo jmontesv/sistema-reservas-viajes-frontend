@@ -25,10 +25,10 @@ export default function FormSearch({ onSubmit, ...props}: FormSearchProps) {
         type="text"
         placeholder="Introduce el destino"
       />
-      <p>
+      <div className="date-field">
         <Label>Fecha</Label>
         <DatePicker />
-      </p>
+      </div>
       <Button type="submit" >
         Buscar
       </Button>

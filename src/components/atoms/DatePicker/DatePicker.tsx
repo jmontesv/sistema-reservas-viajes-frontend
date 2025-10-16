@@ -19,6 +19,7 @@ export default function DatePicker({ value, onChange, placeholder = "Selecciona 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        console.log("Se ejecutó")
         setIsOpen(false);
       }
     }
@@ -78,9 +79,9 @@ export default function DatePicker({ value, onChange, placeholder = "Selecciona 
       {isOpen && (
         <div className={styles.calendar}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-            <Button variant="secondary" onClick={handlePrevMonth}>{"<"}</Button>
+            <Button type="button" onMouseDown={(e) => e.stopPropagation()} variant="secondary" onClick={handlePrevMonth}>{"<"}</Button>
             <span>{currentMonth.toLocaleString("default", { month: "long", year: "numeric" })}</span>
-            <Button variant="secondary" onClick={handleNextMonth}>{">"}</Button>
+            <Button type="button" onMouseDown={(e) => e.stopPropagation()} variant="secondary" onClick={handleNextMonth}>{">"}</Button>
           </div>
 
           <div className={styles.calendarGrid}>

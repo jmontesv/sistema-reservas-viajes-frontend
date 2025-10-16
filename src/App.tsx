@@ -46,15 +46,6 @@ export default function App() {
 
           <Button>Enviar</Button>
         </form>
-
-        <div style={{ maxWidth: "400px", margin: "2rem auto" }}>
-          <DatePicker
-            value={date}
-            onChange={setDate}
-            placeholder="Selecciona fecha"
-          />
-          <p>Fecha seleccionada: {date}</p>
-        </div>
         <FormSearch onSubmit={() => console.log("submit")}/>
       </div>
     );
