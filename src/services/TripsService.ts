@@ -31,8 +31,8 @@ interface FetchTripsParams {
  */
 export const fetchTrips = async ({ origin, destination, date }: FetchTripsParams): Promise<Trip[]> => {
   const params = new URLSearchParams();
-  if (origin) params.append("origin", origin);
-  if (destination) params.append("destination", destination);
+  if (origin) params.append("origen", origin);
+  if (destination) params.append("destino", destination);
 
   const res = await fetch(`http://localhost:5000/viajes/${date}?${params.toString()}`);
 
