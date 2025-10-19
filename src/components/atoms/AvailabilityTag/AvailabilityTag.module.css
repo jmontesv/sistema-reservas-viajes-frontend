@@ -1,0 +1,23 @@
+.tag {
+  display: inline-block;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  transition: background-color var(--transition-base), color var(--transition-base);
+  min-width: 100px;
+}
+
+.available {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary-dark);
+  border: 1px solid var(--color-secondary);
+}
+
+.unavailable {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+}
