@@ -12,7 +12,7 @@ export default function TripsPage() {
     setSearchValues(values);
   };
 
-  console.log(trips)
+  
 
   const headers = ["Origen", "Destino", "Fecha",  "Hora salida", "Precio", "Asientos totales", "Asientos disponibles", "Reservable", ""];
 
@@ -25,7 +25,7 @@ export default function TripsPage() {
     trip.totalSeats,
     trip.seatsAvailable,
     <AvailabilityTag available={trip.available} />,
-    <Button>Reservar</Button>
+    <Button disabled={!trip.available} onClick={() => handleReserve(trip.id)}>Reservar</Button>
   ]);
 
   return (

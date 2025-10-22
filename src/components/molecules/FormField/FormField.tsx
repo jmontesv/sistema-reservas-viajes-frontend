@@ -1,44 +1,49 @@
+import styles from "./FormField.module.css";
 import Label from "../../atoms/label/Label";
 import Input from "../../atoms/Input/Input";
-import styles from "./FormField.module.css";
 
 interface FormFieldProps {
-  label: string;
   id: string;
-  required?: boolean;
-  placeholder?: string;
+  label: string;
   type?: string;
+  placeholder?: string;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: string) => void;
   error?: string;
-  disabled?: boolean;
+  component?: React.ReactNode;
+  required?: boolean;
 }
 
 export default function FormField({
-  label,
   id,
-  required = false,
-  placeholder,
+  label,
   type = "text",
+  placeholder,
   value,
   onChange,
   error,
-  disabled = false
+  component,
+  required = false
 }: FormFieldProps) {
   return (
     <div className={styles.field}>
-      <Label htmlFor={id} required={required}>
-        {label}
-      </Label>
-      <Input
-        id={id}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-      />
-      {error && <span className={styles.error}>{error}</span>}
+      <Label htmlFor={id} required={required}>{label}</Label>
+
+      {component ? (
+        component
+      ) : (
+        <Input
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          required={required}
+          onChange={(e) => onChange?.(e.target.value)}
+          error={Boolean(error)}
+        />
+      )}
+
+      <p className={styles.error}>{error || ""}</p>
     </div>
   );
 }

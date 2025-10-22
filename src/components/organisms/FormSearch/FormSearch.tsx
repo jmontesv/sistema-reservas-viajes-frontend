@@ -4,9 +4,8 @@ import FormField from "../../molecules/FormField/FormField";
 import styles from "./FormSearch.module.css";
 import Button from "../../atoms/Button/Button";
 import DatePicker from "../../atoms/DatePicker/DatePicker";
-import Label from "../../atoms/label/Label";
 
-import { type FormValues, type FormErrors, validateFormSearch } from "../../../utils/validation";
+import { type FormValues, type FormErrors, validateFormSearch, validateField } from "../../../utils/validation";
 
 /* Omitimos la propiedad onSubmit nativa para poder declarar la nuestra */
 interface FormSearchProps extends Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {
@@ -22,26 +21,19 @@ export default function FormSearch({ onSubmit, ...props }: FormSearchProps) {
 
   const [errors, setErrors] = useState<FormErrors>({});
 
-
-  const validate = (values: FormValues): FormErrors => {
-    const errors: FormErrors = {};
-    if (!values.date) {
-      errors.date = "La fecha es obligatoria";
-    } else if (isNaN(new Date(values.date).getTime())) {
-      errors.date = "La fecha no es válida";
-    }
-    return errors;
-  };
-
   const handleChange = (field: keyof FormValues, value: string) => {
-    const newValues = { ...values, [field]: value };
-    setValues(newValues);
-    setErrors(validateFormSearch(newValues)); // ✅ validación en tiempo real
+    setValues((prev) => ({ ...prev, [field]: value }));
+
+    // Validar solo ese campo
+    setErrors((prev) => ({
+      ...prev,
+      [field]: validateField(field, value),
+    }));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const validationErrors = validate(values);
+    const validationErrors = validateFormSearch(values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
@@ -50,7 +42,7 @@ export default function FormSearch({ onSubmit, ...props }: FormSearchProps) {
   };
   
   const isDisabled =
-    !values.date || Object.keys(validate(values)).length > 0;
+    !values.date || Object.keys(validateFormSearch(values)).length > 0;
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} {...props}>
@@ -60,35 +52,30 @@ export default function FormSearch({ onSubmit, ...props }: FormSearchProps) {
         type="text"
         placeholder="Introduce el origen (opcional)"
         value={values.origin}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          handleChange("origin", e.target.value)
-        }
+        onChange={(value: string) => handleChange("origin", value)}
       />
-
       <FormField
         id="destination"
         label="Destino"
         type="text"
         placeholder="Introduce el destino (opcional)"
         value={values.destination}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          handleChange("destination", e.target.value)
-        }
+        onChange={(value: string) => handleChange("destination", value)}
       />
-
-      <div className={styles.dateField}>
-        <Label required>Fecha</Label>
-        <div className={styles.errorWrapper}>
+      <FormField
+        id="date"
+        label="Fecha"
+        error={errors.date}
+        required
+        component={
           <DatePicker
             value={values.date}
-            onChange={(date) => handleChange("date", date)}
+            onChange={(value: string) => handleChange("date", value)}
             placeholder="Selecciona una fecha"
             error={Boolean(errors.date)}
           />
-          {errors.date && <span className={styles.error}>{errors.date}</span>}
-        </div>
-      </div>
-
+        }
+      />
       <Button type="submit" variant="primary" disabled={isDisabled}>
         Buscar
       </Button>

@@ -13,7 +13,7 @@ export interface FormErrors {
  * - Fecha es obligatoria
  * - Origen y destino opcionales
  */
-export const validateFormSearch = (values: FormValues): FormErrors => {
+export function validateFormSearch(values: FormValues): FormErrors {
   const errors: FormErrors = {};
 
   if (!values.date) {
@@ -24,3 +24,12 @@ export const validateFormSearch = (values: FormValues): FormErrors => {
 
   return errors;
 };
+
+export function validateField(field: keyof FormValues, value: string) {
+  switch (field) {
+    case "date":
+      return !value ? "La fecha es obligatoria" : "";
+    default:
+      return "";
+  }
+}

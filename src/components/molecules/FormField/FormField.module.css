@@ -1,10 +1,29 @@
 .field {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
+}
+
+.input {
+  padding: var(--space-sm);
+  border: 1px solid var(--color-gray-400);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  transition: border-color var(--transition-base);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.inputError {
+  border-color: var(--color-danger);
 }
 
 .error {
   color: var(--color-danger);
   font-size: var(--font-size-sm);
-  margin-top: var(--space-xs);
+  min-height: 1.5em;
 }
